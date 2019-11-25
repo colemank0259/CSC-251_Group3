@@ -36,7 +36,7 @@ public class CSC251_Group3 {
         // Divide the total square inches into 144 (total number of inches in a square foot)
         // Example 144/32(total brick square inches) = 4.5 bricks
         double numBricks = 144/sqInch;
-        System.out.println("Out of one square foot you will need 8" + fmt.format(numBricks)+ " bricks.");
+        System.out.println("Out of one square foot you will need " + fmt.format(numBricks)+ " bricks.");
         
         System.out.println("");
         
@@ -98,11 +98,13 @@ public class CSC251_Group3 {
         //////////////
         
         //Divide to the total number of bricks by 30 to estimate how many 60lb bags of mortar mix you need.
-        double mortarBags = totalBricks/30;
-        System.out.println("You will need "+mortarBags+" bags of 60 pound mortar mix for "+totalBricks+" bricks");
+        int mortarBags = (int)totalBricks/30;
         
         //Round this figure up to the nearest whole number before making your purchase
-        ///// TO DO //////////
+        mortarBags++; 
+        
+        System.out.println("You will need "+mortarBags+" bags of 60 pound mortar mix for "+totalBricks+" bricks");
+        
         
         //Enter the cost of a bag
         double bagCost = 6;
