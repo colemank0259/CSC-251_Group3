@@ -20,7 +20,7 @@ public class CSC251_Group3 {
             //Scanner for user input
             Scanner keyboard = new Scanner(System.in); 
             System.out.print("//Header//");
-            System.out.print("\n(1)Bricks \n(2)Project Area \n(3)Mortar Mix \n(4)Run All \n(5)Exit \nPlease enter an option: ");
+            System.out.print("\n(1)Bricks \n(2)Project Area \n(3)Mortar Mix \n(4)Concete Arch \n(5)Run All \n(6)Exit \nPlease enter an option: ");
             int input = keyboard.nextInt();
 
             switch(input){
@@ -37,9 +37,13 @@ public class CSC251_Group3 {
                     System.out.println("");
                     break;
                 case 4:
-                    runAll();
+                    getConcreteArch();
                     break;
                 case 5:
+                    runAll();
+                    System.out.println("");
+                    break;
+                case 6:
                     endLoop = 1 ; //End loop
                     System.out.print("Good bye! \n");
                     break;
@@ -207,7 +211,7 @@ public class CSC251_Group3 {
         
         //Enter the cost of a bag
         double bagCost;
-        System.out.print("How much does a 60lb bag cost?: ");
+        System.out.print("How much does a 60lb bag cost?: $");
         bagCost = keyboard.nextDouble();
 
         System.out.println("Assuming the bag cost is $"+moneyFormat.format(bagCost)+ "...");
@@ -217,6 +221,78 @@ public class CSC251_Group3 {
         System.out.println("All together you will need $"+moneyFormat.format(mortarTotal)+" worth of mortar mix");  
     }
     
+    public static void getConcreteArch()
+    {
+        //Formating for decimals
+        DecimalFormat normalFormat = new DecimalFormat("0.0");
+        DecimalFormat moneyFormat = new DecimalFormat("0.00");
+        
+        System.out.println("");
+
+        //Scanner for user input
+        Scanner keyboard = new Scanner(System.in);
+        Double input;
+        
+        //Enter the span of the arch in feet
+        double archSpan; 
+        System.out.print("Please enter the span of the arch in ft: ");
+        archSpan = keyboard.nextDouble();
+        
+        //Enter the height of the arch in feet
+        double archHeight; 
+        System.out.print("Please enter the height of the arch in ft: ");
+        archHeight = keyboard.nextDouble();
+        
+        //Enter the thickness of the arch in feet
+        double archThickness; 
+        System.out.print("Please enter the thickness of the arch in ft: ");
+        archThickness = keyboard.nextDouble();
+        
+        //Enter the breadth of the arch in feet
+        double archBreadth; 
+        System.out.print("Please enter the breadth of the arch in ft: ");
+        archBreadth = keyboard.nextDouble();
+        
+        //Enter the central angle of the arch in degrees
+        double archAngle; 
+        System.out.print("Please enter the central angle of the arch in degrees: ");
+        archAngle = keyboard.nextDouble();
+        
+        //Calculate the cross-section of the arch
+        double archCrossSection = archThickness * archBreadth;
+        
+        //Calculate the radius of the arch
+        double archRadius = (((archSpan / 2) * (archSpan / 2)) + 
+                (archHeight * archHeight)) / (2 * archHeight);
+        
+        //Calculate the length of the arch
+        double archLength = (archAngle * Math.PI * archRadius) / 180;
+        
+        //Calculate the volume of the arch
+        double archVolume = archCrossSection * archLength;
+        System.out.println("The total quantity of materials in the arch is "
+                + moneyFormat.format (archVolume) +" cubic ft");
+        
+        //Display the typical yield from a 60 pound bag of concrete
+        System.out.println("One 60lb bag of pre-mix concrete yields 0.45 cubic ft");
+        
+        //Calculate the number of bags of pre-mix concrete needed for the arch
+        double concreteBagsRaw = archVolume / .45;
+        int concreteBags = (int) concreteBagsRaw;
+        
+        System.out.println("You will need " + concreteBags + " bags of concrete for this concrete arch");
+        
+        //Enter the cost of a bag
+        double bagCost;
+        System.out.print("How much does a 60lb bag cost?: $");
+        bagCost = keyboard.nextDouble();
+
+        System.out.println("Assuming the bag cost is $"+moneyFormat.format(bagCost)+ "...");
+        
+        //Display total cost (bags x cost ex. $6)
+        double concreteTotal = concreteBags * bagCost;
+        System.out.println("All together you will need $"+moneyFormat.format(concreteTotal)+" worth of concrete mix");
+    }
     
     public static void runAll()
     {
